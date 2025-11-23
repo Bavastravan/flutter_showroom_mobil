@@ -50,9 +50,22 @@ class DetailSparepartScreen extends StatelessWidget {
                   Divider(height: 32, thickness: 1),
                   Text('Deskripsi:', style: AppTextStyles.heading3),
                   SizedBox(height: 4),
-                  (sparepart.deskripsi != null && sparepart.deskripsi!.isNotEmpty)
-                    ? Text(sparepart.deskripsi!, style: AppTextStyles.body2)
-                    : Text('(Deskripsi sparepart belum tersedia)', style: AppTextStyles.body2),
+                  sparepart.deskripsi.isNotEmpty
+                    ? Text(sparepart.deskripsi, style: AppTextStyles.body2)
+                    : Row(
+                        children: [
+                          Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 20),
+                          SizedBox(width: 6),
+                          Text(
+                            '(Deskripsi sparepart belum tersedia)',
+                            style: AppTextStyles.body2.copyWith(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          )
+                        ],
+                      ),
                   SizedBox(height: 28),
                   SizedBox(
                     width: double.infinity,
@@ -60,7 +73,6 @@ class DetailSparepartScreen extends StatelessWidget {
                       icon: Icon(Icons.shopping_cart),
                       label: Text('Pesan Sparepart Ini'),
                       onPressed: () {
-                        // TODO: Integrasi fitur pemesanan/transaksi
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Fitur pesan sparepart belum aktif')),
                         );
