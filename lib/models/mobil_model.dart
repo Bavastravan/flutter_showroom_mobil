@@ -8,6 +8,7 @@ class MobilModel {
   final String tahun;
   final String transmisi;
   final String merk;
+  final String? deskripsi; // opsional, bisa null
 
   MobilModel({
     this.id,
@@ -17,8 +18,10 @@ class MobilModel {
     required this.tahun,
     required this.transmisi,
     required this.merk,
+    this.deskripsi,
   });
 
+  // Untuk membaca data dari Firestore
   factory MobilModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return MobilModel(
@@ -29,9 +32,11 @@ class MobilModel {
       tahun: data['tahun'] ?? '',
       transmisi: data['transmisi'] ?? '',
       merk: data['merk'] ?? '',
+      deskripsi: data['deskripsi'] ?? '', // jika tidak ada, tetap string kosong
     );
   }
 
+  // Untuk mapping ke Firestore
   Map<String, dynamic> toMap() {
     return {
       'nama': nama,
@@ -40,6 +45,7 @@ class MobilModel {
       'tahun': tahun,
       'transmisi': transmisi,
       'merk': merk,
+      'deskripsi': deskripsi ?? '',
     };
   }
 }

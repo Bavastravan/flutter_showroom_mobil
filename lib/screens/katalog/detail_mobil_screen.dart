@@ -47,12 +47,13 @@ class DetailMobilScreen extends StatelessWidget {
                   SizedBox(height: 8),
                   Text('Harga: Rp${mobil.harga}', style: AppTextStyles.heading1),
                   Divider(height: 32, thickness: 1),
-                  Text(
-                    'Tentang Mobil:',
-                    style: AppTextStyles.heading3,
-                  ),
                   SizedBox(height: 4),
-                  Text('(Deskripsi mobil opsional - tambahkan field "deskripsi" di Firestore jika mau)', style: AppTextStyles.body2),
+                Text('Tentang Mobil:', style: AppTextStyles.heading3),
+                SizedBox(height: 4),
+                mobil.deskripsi != null && mobil.deskripsi!.isNotEmpty
+                    ? Text(mobil.deskripsi!, style: AppTextStyles.body2)
+                    : Text('(Deskripsi mobil ini - tambahkan field "deskripsi" di Firestore jika mau)', style: AppTextStyles.body2),
+
                   SizedBox(height: 28),
                   SizedBox(
                     width: double.infinity,
