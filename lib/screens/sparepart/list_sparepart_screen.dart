@@ -17,9 +17,12 @@ class ListSparepartScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
+          if (snapshot.hasError) {
+            return Center(child: Text('Terjadi error: ${snapshot.error}', style: AppTextStyles.body2));
+          }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text('Sparepart belum tersedia', style: AppTextStyles.body2)
+              child: Text('Sparepart belum tersedia', style: AppTextStyles.body2),
             );
           }
 
@@ -37,15 +40,22 @@ class ListSparepartScreen extends StatelessWidget {
                 sparepart: sparepart,
                 onTap: () {
                   Navigator.pushNamed(
-                    context, 
+                    context,
                     '/sparepart/detail',
-                    arguments: sparepart.id
+                    arguments: sparepart, // kirim seluruh data, atau id saja jika prefer
                   );
                 },
               );
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/sparepart/edit'); // route ke form tambah/edit
+        },
+        child: Icon(Icons.add),
+        tooltip: 'Tambah Sparepart Baru',
       ),
     );
   }
