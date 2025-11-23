@@ -18,6 +18,9 @@ class DetailSparepartScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
+          if (snapshot.hasError) {
+            return Center(child: Text('Terjadi error: ${snapshot.error}', style: AppTextStyles.body2));
+          }
           if (!snapshot.hasData || !snapshot.data!.exists) {
             return Center(child: Text('Sparepart tidak ditemukan', style: AppTextStyles.body2));
           }
@@ -35,8 +38,7 @@ class DetailSparepartScreen extends StatelessWidget {
                       sparepart.gambarUrl,
                       height: 160,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) =>
-                          Icon(Icons.extension, size: 120),
+                      errorBuilder: (_, __, ___) => Icon(Icons.extension, size: 120),
                     ),
                   ),
                   SizedBox(height: 18),
@@ -48,7 +50,22 @@ class DetailSparepartScreen extends StatelessWidget {
                   Divider(height: 32, thickness: 1),
                   Text('Deskripsi:', style: AppTextStyles.heading3),
                   SizedBox(height: 4),
-                  Text(sparepart.deskripsi, style: AppTextStyles.body2),
+                  sparepart.deskripsi.isNotEmpty
+                    ? Text(sparepart.deskripsi, style: AppTextStyles.body2)
+                    : Row(
+                        children: [
+                          Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 20),
+                          SizedBox(width: 6),
+                          Text(
+                            '(Deskripsi sparepart belum tersedia)',
+                            style: AppTextStyles.body2.copyWith(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          )
+                        ],
+                      ),
                   SizedBox(height: 28),
                   SizedBox(
                     width: double.infinity,
@@ -56,7 +73,6 @@ class DetailSparepartScreen extends StatelessWidget {
                       icon: Icon(Icons.shopping_cart),
                       label: Text('Pesan Sparepart Ini'),
                       onPressed: () {
-                        // TODO: Tambahkan logika transaksi/pemesanan atau navigasi ke halaman transaksi
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Fitur pesan sparepart belum aktif')),
                         );
