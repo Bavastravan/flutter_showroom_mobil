@@ -11,8 +11,10 @@ class KlaimScreen extends StatefulWidget {
 class _KlaimScreenState extends State<KlaimScreen> {
   final _mobilIdController = TextEditingController();
   final _deskripsiController = TextEditingController();
+
   bool _isLoading = false;
   String? _errorMessage, _successMessage;
+  String _selectedStatus = 'all';
 
   // Submit pengajuan klaim garansi
   Future<void> _submitKlaim() async {
@@ -30,7 +32,9 @@ class _KlaimScreenState extends State<KlaimScreen> {
       });
       return;
     }
-    if (_mobilIdController.text.trim().isEmpty || _deskripsiController.text.trim().isEmpty) {
+
+    if (_mobilIdController.text.trim().isEmpty ||
+        _deskripsiController.text.trim().isEmpty) {
       setState(() {
         _errorMessage = 'Harap isi semua data!';
         _isLoading = false;
@@ -46,6 +50,7 @@ class _KlaimScreenState extends State<KlaimScreen> {
         'status': 'pending',
         'createdAt': FieldValue.serverTimestamp(),
       });
+
       setState(() {
         _successMessage = 'Klaim berhasil diajukan!';
         _mobilIdController.clear();
@@ -66,71 +71,124 @@ class _KlaimScreenState extends State<KlaimScreen> {
   Stream<QuerySnapshot<Map<String, dynamic>>> _userKlaimsStream() {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return const Stream.empty();
-    return FirebaseFirestore.instance
+
+    var query = FirebaseFirestore.instance
         .collection('garansi')
-        .where('userId', isEqualTo: user.uid)
-        .orderBy('createdAt', descending: true)
-        .snapshots();
+        .where('userId', isEqualTo: user.uid);
+
+    if (_selectedStatus != 'all') {
+      query = query.where('status', isEqualTo: _selectedStatus);
+    }
+
+    return query.orderBy('createdAt', descending: true).snapshots();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Klaim dan Cek Garansi')),
+      appBar: AppBar(title: const Text('Klaim dan Cek Garansi')),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Ajukan Klaim Garansi Mobil', style: AppTextStyles.heading2),
-            SizedBox(height: 14),
+            const SizedBox(height: 14),
+
+            // Input ID Mobil
             TextField(
-              controller: _mobilIdController,
-              decoration: InputDecoration(
-                labelText: 'ID Mobil',
-                hintText: 'Masukkan ID mobil yang ingin diklaim',
-              ),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _deskripsiController,
-              minLines: 2,
-              maxLines: 4,
-              decoration: InputDecoration(
-                labelText: 'Deskripsi Klaim',
-                hintText: 'Jelaskan masalah pada mobil anda',
-              ),
-            ),
-            SizedBox(height: 12),
-            if (_errorMessage != null) Text(_errorMessage!, style: TextStyle(color: Colors.red)),
-            if (_successMessage != null) Text(_successMessage!, style: TextStyle(color: Colors.green)),
+  controller: _mobilIdController,
+  decoration: InputDecoration(
+    hintText: 'ID Mobil',
+    prefixIcon: Icon(Icons.directions_car),
+    contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 16), // 🔧 ini penting
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+    filled: true,
+    fillColor: const Color.fromARGB(255, 0, 0, 0),
+  ),
+),
+            const SizedBox(height: 10),
+
+           TextField(
+  controller: _deskripsiController,
+  minLines: 2,
+  maxLines: 4,
+  decoration: InputDecoration(
+    hintText: 'Deskripsi Klaim',
+    prefixIcon: Icon(Icons.description),
+    contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+    filled: true,
+    fillColor: const Color.fromARGB(255, 0, 0, 0),
+  ),
+),
+            const SizedBox(height: 12),
+
+            // Pesan error / sukses
+            if (_errorMessage != null)
+              Text(_errorMessage!, style: const TextStyle(color: Colors.red)),
+            if (_successMessage != null)
+              Text(_successMessage!, style: const TextStyle(color: Colors.green)),
+
+            // Tombol submit klaim
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                icon: Icon(Icons.send),
-                label: Text('Ajukan Klaim'),
+                icon: const Icon(Icons.send),
+                label: const Text('Ajukan Klaim'),
                 onPressed: _isLoading ? null : _submitKlaim,
               ),
             ),
-            Divider(height: 32, thickness: 1),
+
+            const Divider(height: 32, thickness: 1),
             Text('Status Klaim Anda', style: AppTextStyles.heading3),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
+
+            // Filter klaim
+            Row(
+              children: [
+                Text('Filter Status:', style: AppTextStyles.body2),
+                const SizedBox(width: 12),
+                DropdownButton<String>(
+                  value: _selectedStatus,
+                  items: ['all', 'pending', 'approved', 'rejected']
+                      .map((s) => DropdownMenuItem(
+                            value: s,
+                            child: Text(s),
+                          ))
+                      .toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      _selectedStatus = val!;
+                    });
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            // Daftar klaim
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: _userKlaimsStream(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                    return Center(child: Text('Belum ada klaim garansi yang diajukan.', style: AppTextStyles.body2));
+                    return Center(
+                      child: Text(
+                        'Belum ada klaim garansi yang diajukan.',
+                        style: AppTextStyles.body2,
+                      ),
+                    );
                   }
 
                   final klaims = snapshot.data!.docs;
 
                   return ListView.separated(
                     itemCount: klaims.length,
-                    separatorBuilder: (_, __) => SizedBox(height: 10),
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
                     itemBuilder: (context, index) {
                       final klaim = klaims[index];
                       final status = klaim['status'] ?? 'pending';
@@ -140,21 +198,59 @@ class _KlaimScreenState extends State<KlaimScreen> {
                       if (klaim['createdAt'] != null) {
                         created = (klaim['createdAt'] as Timestamp).toDate();
                       }
+
                       return Card(
-                        margin: EdgeInsets.zero,
-                        child: ListTile(
-                          title: Text('Mobil ID: $mobilId'),
-                          subtitle: Column(
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            gradient: LinearGradient(
+                              colors: [Colors.blue.shade50, Colors.white],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Deskripsi: $deskripsi', style: AppTextStyles.body2),
-                              SizedBox(height: 8),
-                              Text('Status: $status', style: TextStyle(fontWeight: FontWeight.bold)),
+                              Row(
+                                children: [
+                                  const Icon(Icons.directions_car,
+                                      size: 30, color: Colors.blue),
+                                  const SizedBox(width: 8),
+                                  Text('Mobil ID: $mobilId',
+                                      style: AppTextStyles.heading3),
+                                  const Spacer(),
+                                  Icon(
+                                    status == 'approved'
+                                        ? Icons.check_circle
+                                        : status == 'rejected'
+                                            ? Icons.cancel
+                                            : Icons.hourglass_top,
+                                    color: status == 'approved'
+                                        ? Colors.green
+                                        : status == 'rejected'
+                                            ? Colors.red
+                                            : Colors.orange,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Text('Deskripsi: $deskripsi',
+                                  style: AppTextStyles.body2),
                               if (created != null)
-                                Text('Diajukan: ${created.day}-${created.month}-${created.year}', style: AppTextStyles.body2),
+                                Text(
+                                  'Diajukan: ${created.day}-${created.month}-${created.year}',
+                                  style: AppTextStyles.body2.copyWith(
+                                    color: Colors.grey,
+                                  ),
+                                ),
                             ],
                           ),
-                          leading: Icon(Icons.verified, color: status == 'approved' ? Colors.green : Colors.orange),
                         ),
                       );
                     },
