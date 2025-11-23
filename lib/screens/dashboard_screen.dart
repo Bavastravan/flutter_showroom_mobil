@@ -31,6 +31,12 @@ class DashboardScreen extends StatelessWidget {
         'color': Colors.teal[400],
         'route': '/garansi/klaim'
       },
+      {
+        'icon': Icons.person,
+        'label': 'Profil Saya',
+        'color': Colors.indigo[400],
+        'route': '/profil'
+      },
     ];
 
     return Scaffold(

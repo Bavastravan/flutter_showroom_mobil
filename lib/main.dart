@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:showroom_mobil/screens/profile_screen.dart';
 
 // Import theme
 import 'themes/colors.dart';
@@ -86,6 +87,8 @@ class MyApp extends StatelessWidget {
             '/sparepart/detail': (context) => DetailSparepartScreen(),
             '/garansi/klaim': (context) => KlaimScreen(),
             '/reset-password': (context) => ResetPasswordScreen(),
+            '/profil': (context) => ProfileScreen(),
+            
           },
         );
       },
