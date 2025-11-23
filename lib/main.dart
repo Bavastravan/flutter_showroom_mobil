@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+// Import theme
+import 'themes/colors.dart';
+import 'themes/text_styles.dart';
+import 'themes/dark.dart';
+import 'utils/theme_mode_notifier.dart';
+
+// Import screens
+import 'screens/landing_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/register_screen.dart';
+import 'screens/dashboard_screen.dart';
+import 'screens/katalog/list_mobil_screen.dart';
+import 'screens/katalog/detail_mobil_screen.dart';
+import 'screens/servis/booking_screen.dart';
+import 'screens/servis/jadwal_screen.dart';
+import 'screens/sparepart/list_sparepart_screen.dart';
+import 'screens/sparepart/detail_sparepart_screen.dart';
+import 'screens/garansi/klaim_screen.dart';
+import 'screens/reset_password_screen.dart';
+
+final themeModeNotifier = ThemeModeNotifier();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyBUbD5ju-_mZrGNvPMv_E5wzJs99rkjF1g",
+      authDomain: "showroom-mobil-b887f.firebaseapp.com",
+      projectId: "showroom-mobil-b887f",
+      storageBucket: "showroom-mobil-b887f.appspot.com",
+      messagingSenderId: "617307420486",
+      appId: "1:617307420486:web:0414862e8365c482de5747",
+      measurementId: "G-3H4MTDYC87",
+    ),
+  );
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeModeNotifier,
+      builder: (context, mode, _) {
+        return MaterialApp(
+          title: 'Showroom Mobil Bekas',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.primaryColor,
+              secondary: AppColors.accentColor,
+              background: AppColors.background,
+              surface: AppColors.card,
+              error: AppColors.danger,
+            ),
+            scaffoldBackgroundColor: AppColors.background,
+            cardColor: AppColors.card,
+           textTheme: TextTheme(
+            displayLarge: AppTextStyles.heading1.copyWith(color: Colors.black),
+            displayMedium: AppTextStyles.heading2.copyWith(color: Colors.black87),
+            displaySmall: AppTextStyles.heading3.copyWith(color: Colors.black87),
+            headlineMedium: AppTextStyles.heading2.copyWith(color: Colors.black87),
+            titleLarge: AppTextStyles.cardTitle.copyWith(color: Colors.black87),
+            bodyLarge: AppTextStyles.body1.copyWith(color: Colors.black87),
+            bodyMedium: AppTextStyles.body2.copyWith(color: Colors.black54),
+            labelLarge: AppTextStyles.button.copyWith(color: Colors.white),
+          ),
+
+          ),
+          darkTheme: AppDarkTheme.themeData,
+          themeMode: mode,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => LandingScreen(),
+            '/login': (context) => LoginScreen(),
+            '/register': (context) => RegisterScreen(),
+            '/dashboard': (context) => DashboardScreen(),
+            '/katalog/list-mobil': (context) => ListMobilScreen(),
+            '/katalog/detail-mobil': (context) => DetailMobilScreen(),
+            '/servis/booking': (context) => BookingScreen(),
+            '/servis/jadwal': (context) => JadwalScreen(),
+            '/sparepart/list': (context) => ListSparepartScreen(),
+            '/sparepart/detail': (context) => DetailSparepartScreen(),
+            '/garansi/klaim': (context) => KlaimScreen(),
+            '/reset-password': (context) => ResetPasswordScreen(),
+          },
+        );
+      },
+    );
+  }
+}
