@@ -12,9 +12,6 @@ class LandingScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // ======================
-            //    KONTEN UTAMA
-            // ======================
             LayoutBuilder(
               builder: (context, constraints) {
                 double maxWidth = constraints.maxWidth < 600
@@ -49,9 +46,14 @@ class LandingScreen extends StatelessWidget {
                             width: double.infinity,
                             child: ElevatedButton.icon(
                               icon: const Icon(Icons.login, color: Colors.white),
-                              label: Text('Masuk', style: theme.textTheme.labelLarge),
+                              label: Text('Masuk'), // tanpa style langsung!
                               onPressed: () => Navigator.pushNamed(context, '/login'),
-                              // style dari theme
+                              style: ElevatedButton.styleFrom(
+                                textStyle: theme.textTheme.labelLarge, // jika perlu style
+                                backgroundColor: theme.colorScheme.primary,
+                                foregroundColor: Colors.white,
+                                padding: EdgeInsets.symmetric(vertical: 16),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 14),
@@ -59,9 +61,14 @@ class LandingScreen extends StatelessWidget {
                             width: double.infinity,
                             child: OutlinedButton.icon(
                               icon: Icon(Icons.person_add, color: theme.colorScheme.secondary),
-                              label: Text('Daftar', style: theme.textTheme.labelLarge),
+                              label: Text('Daftar'), // tanpa style langsung!
                               onPressed: () => Navigator.pushNamed(context, '/register'),
-                              // style dari theme
+                              style: OutlinedButton.styleFrom(
+                                textStyle: theme.textTheme.labelLarge, // jika perlu
+                                side: BorderSide(color: theme.colorScheme.secondary),
+                                foregroundColor: theme.colorScheme.secondary,
+                                padding: EdgeInsets.symmetric(vertical: 16),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 32),
@@ -69,6 +76,7 @@ class LandingScreen extends StatelessWidget {
                             style: TextButton.styleFrom(
                               foregroundColor: theme.colorScheme.secondary,
                               textStyle: theme.textTheme.labelLarge,
+                              padding: EdgeInsets.symmetric(vertical: 16),
                             ),
                             onPressed: () => Navigator.pushNamed(context, '/katalog/list-mobil'),
                             child: Row(
@@ -76,7 +84,7 @@ class LandingScreen extends StatelessWidget {
                               children: [
                                 Icon(Icons.search, size: 20, color: theme.colorScheme.secondary),
                                 const SizedBox(width: 6),
-                                Text('Lihat Katalog Mobil Bekas', style: theme.textTheme.labelLarge),
+                                Text('Lihat Katalog Mobil Bekas'), // tanpa style langsung!
                               ],
                             ),
                           ),
@@ -88,9 +96,6 @@ class LandingScreen extends StatelessWidget {
                 );
               },
             ),
-            // ======================
-            //   TOGGLE MODE (KANAN ATAS)
-            // ======================
             Positioned(
               top: 10,
               right: 10,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/auth_service.dart'; 
+import '../services/auth_service.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
 
@@ -20,10 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
       _errorMessage = null;
     });
-
     String input = _inputController.text.trim();
     String password = _passwordController.text.trim();
-
     try {
       await AuthService().loginWithUsernameOrPhone(
         input: input,
@@ -68,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
@@ -151,8 +150,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 style: TextButton.styleFrom(
                                   foregroundColor: theme.colorScheme.secondary,
+                                  textStyle: theme.textTheme.bodyMedium,
                                 ),
-                                child: Text('Lupa password?', style: theme.textTheme.bodyMedium),
+                                child: Text('Lupa password?'), // tanpa style langsung!
                               ),
                             ),
                             if (_errorMessage != null) ...[
@@ -171,10 +171,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   backgroundColor: theme.colorScheme.secondary,
                                   padding: EdgeInsets.symmetric(vertical: 16),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  textStyle: theme.textTheme.labelLarge,
                                 ),
                                 child: _isLoading
                                     ? CircularProgressIndicator(color: Colors.white)
-                                    : Text('Masuk', style: theme.textTheme.labelLarge),
+                                    : Text('Masuk'), // tanpa style langsung!
                               ),
                             ),
                             SizedBox(height: 16),
@@ -183,37 +184,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () => Navigator.pushNamed(context, '/register'),
                                 style: TextButton.styleFrom(
                                   foregroundColor: theme.colorScheme.secondary,
+                                  textStyle: theme.textTheme.bodyMedium,
                                 ),
-                                child: Text("Belum punya akun? Daftar", style: theme.textTheme.bodyMedium),
+                                child: Text("Belum punya akun? Daftar"), // tanpa style langsung!
                               ),
                             ),
                             Divider(height: 32),
-                            // Google login button
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton.icon(
                                 icon: Icon(Icons.g_mobiledata, color: Colors.white, size: 28),
-                                label: Text("Masuk dengan Google", style: theme.textTheme.labelLarge),
+                                label: Text("Masuk dengan Google"), // tanpa style langsung!
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red[600],
                                   foregroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  textStyle: theme.textTheme.labelLarge,
                                 ),
                                 onPressed: _isLoading ? null : _loginGoogle,
                               ),
                             ),
                             SizedBox(height: 12),
-                            // tombol login Apple (hanya muncul di iOS/macOS)
                             if (!kIsWeb && (Platform.isIOS || Platform.isMacOS))
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton.icon(
                                   icon: Icon(Icons.apple, color: Colors.white),
-                                  label: Text("Masuk dengan Apple", style: theme.textTheme.labelLarge),
+                                  label: Text("Masuk dengan Apple"),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                     foregroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                    textStyle: theme.textTheme.labelLarge,
                                   ),
                                   onPressed: _isLoading ? null : _loginApple,
                                 ),

@@ -25,11 +25,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     final input = _inputController.text.trim();
     try {
       String? email;
-
       if (RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(input)) {
         email = input;
       } else if (RegExp(r'^\d{8,}$').hasMatch(input)) {
-        // Cari email by phone
         var snap = await FirebaseFirestore.instance
             .collection('users')
             .where('phone', isEqualTo: input)
@@ -46,16 +44,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         );
         Navigator.pop(context);
       } else {
-        // --- KIRIM OTP VIA SMS ---
-        // Contoh simulasi OTP random
-       final now = DateTime.now();
+        final now = DateTime.now();
         final otp = (100000 + now.millisecond % 900000).toString();
         setState(() {
           _waitingOtp = true;
           _sentOtp = otp;
         });
-
-        // (PRODUKSI: Kirim SMS via service OTP/SMS gateway)
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Kode OTP simulasikan: $otp')),
         );
@@ -83,7 +77,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       if (RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(input)) {
         email = input;
       } else if (RegExp(r'^\d{8,}$').hasMatch(input)) {
-        // Cari email by phone
         var snap = await FirebaseFirestore.instance
             .collection('users')
             .where('phone', isEqualTo: input)
@@ -93,10 +86,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       }
 
       if (email == null) throw 'Akun/email tidak ditemukan';
-
-      // Reset password DENGAN EMAIL DAN OTP (simulasi):  
-      // Dalam produksi: update password di backend setelah verifikasi OTP benar!
-      // Di Firebase Auth, ini hanya simulasi, reset password only with email!
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Password berhasil diganti.')),
       );
@@ -198,7 +187,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           onPressed: _isLoading ? null : _resetPasswordWithOtp,
                           child: _isLoading
                               ? CircularProgressIndicator(color: Colors.white)
-                              : Text('Reset Password'))
+                              : Text('Reset Password')
+                      )
                     ]
                   ],
                 ),
