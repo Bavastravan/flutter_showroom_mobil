@@ -42,8 +42,9 @@ class ListSparepartScreen extends StatelessWidget {
                   Navigator.pushNamed(
                     context,
                     '/sparepart/detail',
-                    arguments: sparepart, // kirim seluruh data, atau id saja jika prefer
+                    arguments: sparepart.id,   // harus id bertipe String!
                   );
+
                 },
               );
             },
