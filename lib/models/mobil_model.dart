@@ -8,7 +8,8 @@ class MobilModel {
   final String tahun;
   final String transmisi;
   final String merk;
-  final String? deskripsi; // opsional, bisa null
+  final String? deskripsi; // opsional
+  final double? rating;    // opsional, untuk data rating mobil
 
   MobilModel({
     this.id,
@@ -19,9 +20,10 @@ class MobilModel {
     required this.transmisi,
     required this.merk,
     this.deskripsi,
+    this.rating,
   });
 
-  // Untuk membaca data dari Firestore
+  // Mapping dari Firestore
   factory MobilModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return MobilModel(
@@ -32,7 +34,8 @@ class MobilModel {
       tahun: data['tahun'] ?? '',
       transmisi: data['transmisi'] ?? '',
       merk: data['merk'] ?? '',
-      deskripsi: data['deskripsi'] ?? '', // jika tidak ada, tetap string kosong
+      deskripsi: data['deskripsi'] ?? '',
+      rating: (data['rating'] as num?)?.toDouble(),   // ambil rating (jika ada) sebagai double
     );
   }
 
@@ -46,6 +49,7 @@ class MobilModel {
       'transmisi': transmisi,
       'merk': merk,
       'deskripsi': deskripsi ?? '',
+      'rating': rating, // sertakan jika ingin update ke database
     };
   }
 }

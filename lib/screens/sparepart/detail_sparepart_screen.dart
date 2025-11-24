@@ -6,7 +6,7 @@ import '../../themes/text_styles.dart';
 class DetailSparepartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   final String sparepartId = ModalRoute.of(context)?.settings.arguments as String;
+    final String sparepartId = ModalRoute.of(context)?.settings.arguments as String;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,6 +26,7 @@ class DetailSparepartScreen extends StatelessWidget {
           }
 
           final sparepart = SparepartModel.fromFirestore(snapshot.data!);
+          double ratingSparepart = sparepart.rating ?? 4.5;
 
           return Padding(
             padding: const EdgeInsets.all(24),
@@ -42,6 +43,19 @@ class DetailSparepartScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 18),
+                  // ========= RATING =========
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.star_rounded, color: Colors.amber, size: 28),
+                      SizedBox(width: 4),
+                      Text(ratingSparepart.toStringAsFixed(1), style: AppTextStyles.heading1),
+                      SizedBox(width: 6),
+                      Text('★★★★★', style: TextStyle(fontSize: 18, color: Colors.amber)),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+
                   Text(sparepart.nama, style: AppTextStyles.heading2),
                   SizedBox(height: 8),
                   Text('Merk: ${sparepart.merk}', style: AppTextStyles.body1),
@@ -51,22 +65,21 @@ class DetailSparepartScreen extends StatelessWidget {
                   Text('Deskripsi:', style: AppTextStyles.heading3),
                   SizedBox(height: 4),
                   sparepart.deskripsi.isNotEmpty
-            ? Text(sparepart.deskripsi, style: AppTextStyles.body2)
-            : Row(
-                children: [
-                  Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 20),
-                  SizedBox(width: 6),
-                  Text(
-                    '(Deskripsi sparepart belum tersedia)',
-                    style: AppTextStyles.body2.copyWith(
-                      color: Colors.orange,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                ],
-              ),
-
+                      ? Text(sparepart.deskripsi, style: AppTextStyles.body2)
+                      : Row(
+                          children: [
+                            Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 20),
+                            SizedBox(width: 6),
+                            Text(
+                              '(Deskripsi sparepart belum tersedia)',
+                              style: AppTextStyles.body2.copyWith(
+                                color: Colors.orange,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ],
+                        ),
                   SizedBox(height: 28),
                   SizedBox(
                     width: double.infinity,

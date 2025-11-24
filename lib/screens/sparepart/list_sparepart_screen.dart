@@ -51,13 +51,6 @@ class ListSparepartScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/sparepart/edit'); // route ke form tambah/edit
-        },
-        child: Icon(Icons.add),
-        tooltip: 'Tambah Sparepart Baru',
-      ),
     );
   }
 }
