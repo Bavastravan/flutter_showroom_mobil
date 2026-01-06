@@ -9,13 +9,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   cupertino_icons: ^1.0.8
-  url_launcher: ^6.0.20
-  firebase_core: ^2.28.0         
-  cloud_firestore: ^4.16.0       
-  firebase_auth: ^4.19.1
-  google_sign_in: ^6.1.0
-  sign_in_with_apple: ^5.0.0
+
+  # Firebase (versi stabil untuk Flutter 3.9.x)
+  firebase_core: ^2.32.0
+  cloud_firestore: ^4.17.5
+  firebase_auth: ^4.20.0
+
+  # Google Sign-In
+  google_sign_in: ^6.3.0
+
+  # Apple Sign-In (versi baru, tidak pakai Registrar)
+  sign_in_with_apple: ^7.0.1
+
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:
@@ -24,7 +32,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
   assets:
     - assets/images/
     - assets/icons/
-
