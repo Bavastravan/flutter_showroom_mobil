@@ -1,0 +1,10 @@
+ListView ini menampilkan daftar mahasiswa yang siap atau belum siap skripsi dalam bentuk kartu (Card) yang rapi dan bisa di‑scroll. Setiap kartu berisi icon profil, nama, NIM, prodi, info publikasi, info akademik/administratif, dan badge warna status kelayakan skripsi.
+
+1. Data mahasiswa disimpan dalam List<Map<String, dynamic>> items, lalu ListView.builder membuat item secara dinamis sesuai jumlah data sehingga tetap ringan meskipun datanya banyak.
+
+2. Untuk setiap indeks, itemBuilder membangun satu Card yang di dalamnya ada layout Row dan Column: bagian kiri icon profil, bagian kanan detail teks dan badge status.
+
+3. Fungsi helper seperti _getEligibilityColor, _getEligibilityText, dan _getEligibilityIcon menentukan warna dan teks badge berdasarkan nilai boolean eligible, sehingga status “LAYAK SKRIPSI” dan “BELUM LAYAK” bisa ditampilkan otomatis.
+
+4. Event onTap pada InkWell/Card memanggil ScaffoldMessenger.of(context).showSnackBar(...) untuk menampilkan SnackBar berisi nama, NIM, dan status mahasiswa saat user mengetuk salah satu item.
+
