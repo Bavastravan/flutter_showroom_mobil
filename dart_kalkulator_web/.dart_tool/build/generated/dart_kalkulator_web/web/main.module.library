@@ -1,0 +1,1 @@
+{"isEntrypoint":true,"deps":["dart_kalkulator_web|web/kalkulator.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["js","html"],"hasMain":true}

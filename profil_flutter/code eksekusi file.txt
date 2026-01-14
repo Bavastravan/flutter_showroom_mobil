@@ -1,0 +1,384 @@
+                paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 173:12  tear
+package:flutter/src/material/page_transitions_theme.dart 1457:21                  paint
+package:flutter/src/widgets/snapshot_widget.dart 337:7                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 173:12  tear
+package:flutter/src/material/page_transitions_theme.dart 1362:21                  paint
+package:flutter/src/widgets/snapshot_widget.dart 337:7                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 173:12  tear
+package:flutter/src/material/page_transitions_theme.dart 1457:21                  paint
+package:flutter/src/widgets/snapshot_widget.dart 337:7                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 173:12  tear
+package:flutter/src/material/page_transitions_theme.dart 1362:21                  paint
+package:flutter/src/widgets/snapshot_widget.dart 337:7                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 176:10                                  _repaintCompositedChild
+package:flutter/src/rendering/object.dart 121:5                                   repaintCompositedChild
+package:flutter/src/rendering/object.dart 272:7                                   [_compositeChild]
+package:flutter/src/rendering/object.dart 253:7                                   paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/proxy_box.dart 3868:11                              paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/widgets/overlay.dart 1120:14                                  paint
+package:flutter/src/widgets/overlay.dart 1477:13                                  paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/view.dart 322:14                                    paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 176:10                                  _repaintCompositedChild
+package:flutter/src/rendering/object.dart 121:5                                   repaintCompositedChild
+package:flutter/src/rendering/object.dart 1309:31                                 flushPaint
+package:flutter/src/rendering/object.dart 1319:14                                 flushPaint
+package:flutter/src/rendering/binding.dart 631:5                                  drawFrame
+package:flutter/src/widgets/binding.dart 1261:13                                  drawFrame
+package:flutter/src/rendering/binding.dart 495:5                                  [_handlePersistentFrameCallback]   
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 118:77  tear
+package:flutter/src/scheduler/binding.dart 1434:7                                 [_invokeFrameCallback]
+package:flutter/src/scheduler/binding.dart 1347:9                                 handleDrawFrame
+package:flutter/src/scheduler/binding.dart 1057:9                                 <fn>
+lib/_engine/engine/frame_service.dart 145:9                                       <fn>
+dart-sdk/lib/_internal/js_dev_runtime/private/isolate_helper.dart 47:11           internalCallback
+
+Image provider: NetworkImage(""C:UsersArdianPicturesProfile-Transparent.png"", scale: 1.0)
+Image key: NetworkImage(""C:UsersArdianPicturesProfile-Transparent.png"", scale: 1.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+Starting application from main method in: org-dartlang-app:/web_entrypoint.dart.
+══╡ EXCEPTION CAUGHT BY IMAGE RESOURCE SERVICE ╞════════════════════════════════════════════════════
+The following FormatException was thrown resolving an image stream completer:
+Scheme not starting with alphabetic character (at character 1)
+"C:UsersArdianPicturesProfile-Transparent.png"
+^
+
+When the exception was thrown, this was the stack:
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/errors.dart 274:3       throw_
+dart-sdk/lib/core/uri.dart 1953:5                                                 _fail
+dart-sdk/lib/core/uri.dart 2536:7                                                 _makeScheme
+dart-sdk/lib/core/uri.dart 1796:18                                                notSimple
+dart-sdk/lib/core/uri.dart 1175:17                                                parse
+dart-sdk/lib/core/uri.dart 4650:27                                                resolve
+package:flutter/src/painting/_network_image_web.dart 185:35                       <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 623:19               <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 648:23               <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 542:3                _asyncStartSync
+package:flutter/src/painting/_network_image_web.dart 184:20                       [_fetchImageBytes]
+package:flutter/src/painting/_network_image_web.dart 133:36                       <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 623:19               <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 648:23               <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 542:3                _asyncStartSync
+package:flutter/src/painting/_network_image_web.dart 134:7                        loadViaDecode
+package:flutter/src/painting/_network_image_web.dart 170:16                       <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 623:19               <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 648:23               <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 542:3                _asyncStartSync
+package:flutter/src/painting/_network_image_web.dart 125:32                       [_loadAsync]
+package:flutter/src/painting/_network_image_web.dart 107:7                        loadImage
+package:flutter/src/painting/image_provider.dart 546:39                           <fn>
+package:flutter/src/painting/image_cache.dart 368:22                              putIfAbsent
+package:flutter/src/painting/image_provider.dart 543:81                           resolveStreamForKey
+package:flutter/src/painting/image_provider.dart 383:9                            <fn>
+package:flutter/src/painting/image_provider.dart 499:13                           <fn>
+package:flutter/src/foundation/synchronous_future.dart 44:20                      <fn>
+package:flutter/src/foundation/synchronous_future.dart 46:22                      then
+package:flutter/src/painting/image_provider.dart 495:8                            [_createErrorHandlerAndKey]        
+package:flutter/src/painting/image_provider.dart 380:5                            resolve
+package:flutter/src/painting/decoration_image.dart 373:55                         paint
+package:flutter/src/painting/box_decoration.dart 560:5                            [_paintBackgroundImage]
+package:flutter/src/painting/box_decoration.dart 577:5                            paint
+package:flutter/src/rendering/proxy_box.dart 2414:7                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/box.dart 3367:14                                    defaultPaint
+package:flutter/src/rendering/flex.dart 1317:7                                    paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/shifted_box.dart 81:14                              paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/proxy_box.dart 2444:11                              paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/shifted_box.dart 81:14                              paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/shifted_box.dart 81:14                              paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/box.dart 3367:14                                    defaultPaint
+package:flutter/src/rendering/custom_layout.dart 425:5                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/material/material.dart 634:11                                 paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/proxy_box.dart 2184:15                              <fn>
+package:flutter/src/rendering/object.dart 609:7                                   pushClipRRect
+package:flutter/src/rendering/proxy_box.dart 2171:20                              paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 176:10                                  _repaintCompositedChild
+package:flutter/src/rendering/object.dart 121:5                                   repaintCompositedChild
+package:flutter/src/rendering/object.dart 272:7                                   [_compositeChild]
+package:flutter/src/rendering/object.dart 253:7                                   paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 173:12  tear
+package:flutter/src/material/page_transitions_theme.dart 1457:21                  paint
+package:flutter/src/widgets/snapshot_widget.dart 337:7                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 173:12  tear
+package:flutter/src/material/page_transitions_theme.dart 1362:21                  paint
+package:flutter/src/widgets/snapshot_widget.dart 337:7                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 173:12  tear
+package:flutter/src/material/page_transitions_theme.dart 1457:21                  paint
+package:flutter/src/widgets/snapshot_widget.dart 337:7                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 173:12  tear
+package:flutter/src/material/page_transitions_theme.dart 1362:21                  paint
+package:flutter/src/widgets/snapshot_widget.dart 337:7                            paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 176:10                                  _repaintCompositedChild
+package:flutter/src/rendering/object.dart 121:5                                   repaintCompositedChild
+package:flutter/src/rendering/object.dart 272:7                                   [_compositeChild]
+package:flutter/src/rendering/object.dart 253:7                                   paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/proxy_box.dart 3868:11                              paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/widgets/overlay.dart 1120:14                                  paint
+package:flutter/src/widgets/overlay.dart 1477:13                                  paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/proxy_box.dart 140:12                               paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 261:12                                  paintChild
+package:flutter/src/rendering/view.dart 322:14                                    paint
+package:flutter/src/rendering/object.dart 3423:7                                  [_paintWithContext]
+package:flutter/src/rendering/object.dart 176:10                                  _repaintCompositedChild
+package:flutter/src/rendering/object.dart 121:5                                   repaintCompositedChild
+package:flutter/src/rendering/object.dart 1309:31                                 flushPaint
+package:flutter/src/rendering/object.dart 1319:14                                 flushPaint
+package:flutter/src/rendering/binding.dart 631:5                                  drawFrame
+package:flutter/src/widgets/binding.dart 1261:13                                  drawFrame
+package:flutter/src/rendering/binding.dart 495:5                                  [_handlePersistentFrameCallback]   
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/operations.dart 118:77  tear
+package:flutter/src/scheduler/binding.dart 1434:7                                 [_invokeFrameCallback]
+package:flutter/src/scheduler/binding.dart 1347:9                                 handleDrawFrame
+package:flutter/src/scheduler/binding.dart 1057:9                                 <fn>
+lib/_engine/engine/frame_service.dart 145:9                                       <fn>
+dart-sdk/lib/_internal/js_dev_runtime/private/isolate_helper.dart 47:11           internalCallback
+
+Image provider: NetworkImage(""C:UsersArdianPicturesProfile-Transparent.png"", scale: 1.0)
+Image key: NetworkImage(""C:UsersArdianPicturesProfile-Transparent.png"", scale: 1.0)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+Application finished.
+Terminate batch job (Y/N)? y
+PS E:\Pemrograman Mobile_5\profil_flutter> flutter run
+Connected devices:
+Windows (desktop) • windows •
+windows-x64    • Microsoft       
+Windows [Version 10.0.26200.6899]
+Edge (web)        • edge    •
+web-javascript • Microsoft Edge  
+141.0.3537.85
+[1]: Windows (windows)
+[2]: Edge (edge)
+Please choose one (or "q" to
+quit): 2
+Launching lib\main.dart on Edge
+in debug mode...
+Waiting for connection from debug service on Edge...              
+   37.9s
+This app is linked to the debug
+service:
+ws://127.0.0.1:54422/uP2ljDXw5Gg=
+/ws
+Debug service listening on
+ws://127.0.0.1:54422/uP2ljDXw5Gg=
+/ws
+
+Flutter run key commands.        
+r Hot reload.
+R Hot restart.
+h List all available interactive 
+commands.
+d Detach (terminate "flutter run"
+but leave application running).  
+c Clear the screen
+q Quit (terminate the application
+on the device).
+
+A Dart VM Service on Edge is     
+available at:
+http://127.0.0.1:54422/uP2ljDXw5G
+g=
+Starting application from main
+method in:
+org-dartlang-app:/web_entrypoint.
+dart.
+The Flutter DevTools debugger and
+profiler on Edge is available at:
+http://127.0.0.1:9101?uri=http://
+127.0.0.1:54422/uP2ljDXw5Gg=     
+Starting application from main
+method in:
+org-dartlang-app:/web_entrypoint.
+dart.
+Application finished.
+Terminate batch job (Y/N)? y
+PS E:\Pemrograman Mobile_5\profil_flutter> flutter run
+Connected devices:
+Windows (desktop) • windows •
+windows-x64    • Microsoft       
+Windows [Version 10.0.26200.6899]
+Edge (web)        • edge    •
+web-javascript • Microsoft Edge  
+141.0.3537.85
+[1]: Windows (windows)
+[2]: Edge (edge)
+Please choose one (or "q" to     
+quit): 2
+Launching lib\main.dart on Edge
+in debug mode...
+Waiting for connection from debug service on Edge...              
+   37.5s
+This app is linked to the debug
+service:
+ws://127.0.0.1:63617/x0mWMI39A00=
+/ws
+Debug service listening on
+ws://127.0.0.1:63617/x0mWMI39A00=
+/ws
+
+Flutter run key commands.        
+r Hot reload.
+R Hot restart.
+h List all available interactive 
+commands.
+d Detach (terminate "flutter run"
+but leave application running).  
+c Clear the screen
+q Quit (terminate the application
+on the device).
+
+A Dart VM Service on Edge is
+available at:
+http://127.0.0.1:63617/x0mWMI39A0
+0=
+Starting application from main
+method in:
+org-dartlang-app:/web_entrypoint.
+dart.
+The Flutter DevTools debugger and
+profiler on Edge is available at:
+http://127.0.0.1:9101?uri=http://
+127.0.0.1:63617/x0mWMI39A00=
+

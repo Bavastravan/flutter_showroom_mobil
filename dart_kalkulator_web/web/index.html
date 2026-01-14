@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Web With "Dart"</title>
+  <style>
+    /* ====== Background Animasi ====== */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(270deg, #a1c4fd, #c2e9fb, #fbc2eb, #a6c1ee);
+      background-size: 800% 800%;
+      animation: gradientBackground 20s ease infinite;
+    }
+
+    @keyframes gradientBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ====== Body & Layout ====== */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #2f3e46;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .calculator {
+      background-color: #ffffffcc;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 320px;
+    }
+
+    .expression {
+      text-align: right;
+      font-size: 16px;
+      color: #666;
+      min-height: 20px;
+      margin-bottom: 5px;
+      padding-right: 5px;
+    }
+
+    .display {
+      width: 100%;
+      height: 60px;
+      font-size: 28px;
+      text-align: right;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 18px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007acc;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .operator {
+      background-color: #fca311;
+    }
+
+    .operator:hover {
+      background-color: #e59400;
+    }
+
+    .wide {
+      grid-column: span 2;
+    }
+
+    .danger {
+      background-color: #e63946;
+    }
+
+    .danger:hover {
+      background-color: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kalkulator Web With "Dart"</h1>
+  <div class="calculator">
+    <div id="expression" class="expression"></div>
+    <div id="display" class="display">0</div>
+    <div class="buttons">
+      <button class="danger" onclick="clearDisplay()">C</button>
+      <button onclick="backspace()">⌫</button>
+      <button class="operator" onclick="setOperator('%')">%</button>
+      <button class="operator" onclick="setOperator('/')">÷</button>
+
+      <button onclick="input('7')">7</button>
+      <button onclick="input('8')">8</button>
+      <button onclick="input('9')">9</button>
+      <button class="operator" onclick="setOperator('*')">×</button>
+
+      <button onclick="input('4')">4</button>
+      <button onclick="input('5')">5</button>
+      <button onclick="input('6')">6</button>
+      <button class="operator" onclick="setOperator('-')">−</button>
+
+      <button onclick="input('1')">1</button>
+      <button onclick="input('2')">2</button>
+      <button onclick="input('3')">3</button>
+      <button class="operator" onclick="setOperator('+')">+</button>
+
+      <button class="wide" onclick="input('0')">0</button>
+      <button onclick="input('.')">.</button>
+      <button class="operator" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    let currentInput = '';
+    let operator = '';
+    let operand1 = '';
+    let operand2 = '';
+    let resetNext = false;
+
+    const display = document.getElementById('display');
+    const expression = document.getElementById('expression');
+
+    function updateDisplay(value) {
+      display.textContent = value;
+    }
+
+    function updateExpression(text) {
+      expression.textContent = text;
+    }
+
+    function input(value) {
+      if (resetNext) {
+        currentInput = '';
+        resetNext = false;
+      }
+
+      if (value === '.' && currentInput.includes('.')) return;
+
+      currentInput += value;
+      updateDisplay(currentInput);
+    }
+
+    function setOperator(op) {
+      if (currentInput === '' && operand1 === '') return;
+
+      if (operand1 && operator && currentInput) {
+        calculate();
+      }
+
+      operator = op;
+      operand1 = currentInput || operand1;
+      currentInput = '';
+      updateExpression(`${operand1} ${getOperatorSymbol(operator)}`);
+    }
+
+    function calculate() {
+      if (!operator || currentInput === '') return;
+
+      operand2 = currentInput;
+      let result;
+
+      const num1 = parseFloat(operand1);
+      const num2 = parseFloat(operand2);
+
+      switch (operator) {
+        case '+': result = num1 + num2; break;
+        case '-': result = num1 - num2; break;
+        case '*': result = num1 * num2; break;
+        case '/': result = num2 !== 0 ? num1 / num2 : 'Error'; break;
+        case '%': result = num1 % num2; break;
+        default: return;
+      }
+
+      updateDisplay(result);
+      updateExpression(`${operand1} ${getOperatorSymbol(operator)} ${operand2} =`);
+      currentInput = result.toString();
+      operand1 = result;
+      operator = '';
+      resetNext = true;
+    }
+
+    function clearDisplay() {
+      currentInput = '';
+      operand1 = '';
+      operand2 = '';
+      operator = '';
+      resetNext = false;
+      updateDisplay('0');
+      updateExpression('');
+    }
+
+    function backspace() {
+      if (resetNext) {
+        currentInput = '';
+        resetNext = false;
+        updateDisplay('0');
+        return;
+      }
+
+      currentInput = currentInput.slice(0, -1);
+      updateDisplay(currentInput || '0');
+    }
+
+    function getOperatorSymbol(op) {
+      switch (op) {
+        case '/': return '÷';
+        case '*': return '×';
+        case '-': return '−';
+        case '+': return '+';
+        case '%': return '%';
+        default: return op;
+      }
+    }
+  </script>
+</body>
+</html>
