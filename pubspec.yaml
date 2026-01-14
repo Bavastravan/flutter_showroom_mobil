@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -12,27 +12,37 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  # Firebase (versi stabil untuk Flutter 3.9.x)
+  # === FIREBASE ===
   firebase_core: ^2.32.0
   cloud_firestore: ^4.17.5
   firebase_auth: ^4.20.0
+  # Tambahan: Untuk upload gambar ke Firebase nanti
+  firebase_storage: ^11.7.7 
 
-  # Google Sign-In
+  # === AUTHENTICATION ===
   google_sign_in: ^6.3.0
-
-  # Apple Sign-In (versi baru, tidak pakai Registrar)
   sign_in_with_apple: ^7.0.1
 
+  # === UTILITIES ===
   url_launcher: ^6.3.0
+  intl: ^0.19.0 # Untuk format tanggal & mata uang
+  
+  # Tambahan: Untuk ambil foto dari Galeri/Kamera
+  image_picker: ^1.1.2 
+  
+  # Tambahan: Agar gambar network disimpan di cache (lebih cepat & hemat kuota)
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
 
+  # === DAFTAR ASET (GAMBAR LOKAL) ===
+  # Pastikan file veloz.jpg ada di folder: root_project/assets/images/veloz.jpg
   assets:
     - assets/images/
     - assets/icons/

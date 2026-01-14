@@ -18,48 +18,72 @@ class _ListMobilScreenState extends State<ListMobilScreen> {
   int? _maxHarga;
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Katalog Mobil Bekas'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+Widget build(BuildContext context) {
+  final theme = Theme.of(context);
+  final colorScheme = theme.colorScheme;
+  final textTheme = theme.textTheme;
+
+  return Scaffold(
+  appBar: AppBar(
+    centerTitle: true, // <─ paksa selalu di tengah
+    title: Text(
+      'Katalog Mobil Bekas',
+      style: textTheme.titleLarge?.copyWith(
+        color: colorScheme.onSurface,
+      ),
+    ),
+    backgroundColor: colorScheme.surface,
+    foregroundColor: colorScheme.onSurface,
+    leading: IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => Navigator.pop(context),
+    ),
+  ),
+  body: Column(
+    children: [
+      // Search & Filter tetap sama
+      Padding(
+        padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                onChanged: (val) => setState(() => _search = val),
+                style: textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.onSurface,
+                ),
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                  hintText: "Cari mobil ...",
+                  hintStyle: textTheme.bodyMedium?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    borderSide: BorderSide.none,
+                  ),
+                  fillColor: colorScheme.surfaceVariant,
+                  filled: true,
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 2),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              icon: Icon(
+                Icons.tune,
+                color: colorScheme.primary,
+              ),
+              onPressed: _showFilterDialog,
+              tooltip: 'Filter',
+            ),
+          ],
         ),
       ),
-      body: Column(
-        children: [
-          // === Search & Filter ===
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    onChanged: (val) => setState(() => _search = val),
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      hintText: "Cari mobil ...",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18),
-                        borderSide: BorderSide.none,
-                      ),
-                      fillColor: theme.cardColor,
-                      filled: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 2),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 8),
-                IconButton(
-                  icon: Icon(Icons.tune, color: theme.colorScheme.primary),
-                  onPressed: _showFilterDialog,
-                  tooltip: 'Filter',
-                ),
-              ],
-            ),
-          ),
           // === Daftar Mobil ===
           Expanded(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(

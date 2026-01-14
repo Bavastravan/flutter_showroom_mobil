@@ -15,12 +15,16 @@ import 'screens/register_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/katalog/list_mobil_screen.dart';
 import 'screens/katalog/detail_mobil_screen.dart';
-import 'screens/servis/booking_screen.dart';
+import 'screens/servis/booking_screen.dart'; // Ini booking servis (bawaan lama)
 import 'screens/servis/jadwal_screen.dart';
 import 'screens/sparepart/list_sparepart_screen.dart';
 import 'screens/sparepart/detail_sparepart_screen.dart';
 import 'screens/garansi/klaim_screen.dart';
 import 'screens/reset_password_screen.dart';
+
+// --- TAMBAHKAN IMPORT INI ---
+// Pastikan path foldernya sesuai dengan tempat Anda menyimpan file booking_mobil_screen.dart
+import 'screens/booking/booking_mobil_screen.dart'; 
 
 final themeModeNotifier = ThemeModeNotifier();
 
@@ -59,17 +63,16 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: AppColors.background,
             cardColor: AppColors.card,
-           textTheme: TextTheme(
-            displayLarge: AppTextStyles.heading1.copyWith(color: Colors.black),
-            displayMedium: AppTextStyles.heading2.copyWith(color: Colors.black87),
-            displaySmall: AppTextStyles.heading3.copyWith(color: Colors.black87),
-            headlineMedium: AppTextStyles.heading2.copyWith(color: Colors.black87),
-            titleLarge: AppTextStyles.cardTitle.copyWith(color: Colors.black87),
-            bodyLarge: AppTextStyles.body1.copyWith(color: Colors.black87),
-            bodyMedium: AppTextStyles.body2.copyWith(color: Colors.black54),
-            labelLarge: AppTextStyles.button.copyWith(color: Colors.white),
-          ),
-
+            textTheme: TextTheme(
+              displayLarge: AppTextStyles.heading1.copyWith(color: Colors.black),
+              displayMedium: AppTextStyles.heading2.copyWith(color: Colors.black87),
+              displaySmall: AppTextStyles.heading3.copyWith(color: Colors.black87),
+              headlineMedium: AppTextStyles.heading2.copyWith(color: Colors.black87),
+              titleLarge: AppTextStyles.cardTitle.copyWith(color: Colors.black87),
+              bodyLarge: AppTextStyles.body1.copyWith(color: Colors.black87),
+              bodyMedium: AppTextStyles.body2.copyWith(color: Colors.black54),
+              labelLarge: AppTextStyles.button.copyWith(color: Colors.white),
+            ),
           ),
           darkTheme: AppDarkTheme.themeData,
           themeMode: mode,
@@ -79,16 +82,27 @@ class MyApp extends StatelessWidget {
             '/login': (context) => LoginScreen(),
             '/register': (context) => RegisterScreen(),
             '/dashboard': (context) => DashboardScreen(),
+            
+            // Katalog Mobil
             '/katalog/list-mobil': (context) => ListMobilScreen(),
             '/katalog/detail-mobil': (context) => DetailMobilScreen(),
-            '/servis/booking': (context) => BookingScreen(),
+            
+            // --- TAMBAHKAN ROUTE INI ---
+            // Route untuk Form Pemesanan Mobil (Beli Sekarang)
+            '/katalog/detail-mobil/booking': (context) => BookingMobilScreen(),
+
+            // Servis
+            '/servis/booking': (context) => BookingScreen(), // Booking Servis
             '/servis/jadwal': (context) => JadwalScreen(),
+
+            // Sparepart
             '/sparepart/list': (context) => ListSparepartScreen(),
             '/sparepart/detail': (context) => DetailSparepartScreen(),
+
+            // Lainnya
             '/garansi/klaim': (context) => KlaimScreen(),
             '/reset-password': (context) => ResetPasswordScreen(),
             '/profil': (context) => ProfileScreen(),
-            
           },
         );
       },
