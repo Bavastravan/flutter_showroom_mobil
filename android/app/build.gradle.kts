@@ -6,7 +6,9 @@ plugins {
 }
 
 android {
+    // UBAH INI: Sesuaikan dengan nama package project Anda
     namespace = "com.example.showroom_mobil"
+    
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,8 +22,9 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // UBAH INI JUGA: Harus sama dengan namespace
         applicationId = "com.example.showroom_mobil"
+        
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

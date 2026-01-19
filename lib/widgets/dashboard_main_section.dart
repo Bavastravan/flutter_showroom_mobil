@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart'; // Pastikan package intl sudah ada di pubspec.yaml
+import 'package:intl/intl.dart';
 
 class DashboardMainSection extends StatefulWidget {
   const DashboardMainSection({super.key});
@@ -17,180 +17,179 @@ class _DashboardMainSectionState extends State<DashboardMainSection> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      // AppBar dinonaktifkan/tinggi 0 karena kita buat custom header di body
       appBar: AppBar(
         elevation: 0,
         backgroundColor: theme.scaffoldBackgroundColor,
         toolbarHeight: 0,
       ),
       body: ListView(
+        // BouncingScrollPhysics agar scroll terasa natural di Android/iOS
+        physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.zero,
-
         children: [
-
+          // === 1. HEADER & SEARCH BAR ===
           Padding(
-  padding: const EdgeInsets.fromLTRB(10, 18, 10, 10), // Short-hand padding
-  child: Row(
-    children: [
-      // 1. TOMBOL BACK (Dioptimalkan)
-      IconButton(
-        // 'constraints' & 'padding' ini kuncinya. 
-        // Default IconButton memakan ruang 48x48. Kita kecilkan area sentuhnya.
-        constraints: const BoxConstraints(), 
-        padding: const EdgeInsets.all(8), 
-        icon: Icon(Icons.arrow_back, color: theme.iconTheme.color, size: 28),
-        onPressed: () => Navigator.pop(context),
-      ),
-      
-      const SizedBox(width: 8), // Beri sedikit jarak manual
-
-      // 2. SEARCH BAR (Flexible/Expanded)
-      Expanded(
-        child: SizedBox(
-          height: 41,
-          child: TextField(
-            readOnly: true,
-            // Tambahkan maxLines 1 agar teks tidak turun ke bawah
-            maxLines: 1, 
-            textAlignVertical: TextAlignVertical.center, // Pastikan teks di tengah vertikal
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.search, size: 20),
-              // textOverflow ellipsis: Jika hint kepanjangan, akan jadi titik-titik (...)
-              hintText: "Cari mobil, sparepart...", 
-              hintStyle: theme.textTheme.bodyMedium?.copyWith(
-                overflow: TextOverflow.ellipsis, 
-              ),
-              fillColor: theme.cardColor,
-              filled: true,
-              isDense: true, // Membuat internal padding lebih rapat
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12), // Padding vertikal otomatis diatur isDense
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(23),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
-        ),
-      ),
-
-      const SizedBox(width: 8), // Beri sedikit jarak manual
-
-      // 3. TOMBOL MORE (Dioptimalkan)
-      IconButton(
-        constraints: const BoxConstraints(),
-        padding: const EdgeInsets.all(8),
-        icon: Icon(Icons.more_vert, color: theme.iconTheme.color, size: 26),
-        onPressed: () {},
-      ),
-    ],
-  ),
-),
-          
-        Padding(
-  padding: const EdgeInsets.fromLTRB(12, 16, 12, 10), // Sedikit tambah padding atas agar lega
-  child: Row(
-    crossAxisAlignment: CrossAxisAlignment.center, // Pastikan vertikal di tengah
-    children: [
-      // 1. AVATAR (Ukuran Tetap)
-      const CircleAvatar(
-        radius: 28,
-        backgroundImage: AssetImage('assets/images/showroom_logo.png'),
-        backgroundColor: Colors.grey,
-      ),
-      const SizedBox(width: 12), 
-
-      // 2. INFORMASI TENGAH (MENGISI SISA RUANG / RESPONSIVE)
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Nama Showroom
-            Text(
-              'Showroom Mobil Bekas Jaya',
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 4),
-            
-            // Baris Rating & Member
-            Row(
+            padding: const EdgeInsets.fromLTRB(10, 18, 10, 10),
+            child: Row(
               children: [
-                const Icon(Icons.star, color: Colors.amber, size: 16),
-                const SizedBox(width: 4),
-                Text(
-                  '4.9', 
-                  style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold)
+                // Tombol Back
+                IconButton(
+                  constraints: const BoxConstraints(),
+                  padding: const EdgeInsets.all(8),
+                  icon: Icon(Icons.arrow_back, color: theme.iconTheme.color, size: 28),
+                  onPressed: () => Navigator.pop(context),
                 ),
+                
                 const SizedBox(width: 8),
-                const Icon(Icons.verified, color: Colors.blue, size: 14),
-                const SizedBox(width: 2),
-                Flexible( // Flexible mencegah overflow pada layar sangat kecil
-                  child: Text(
-                    '1123 Member',
-                    style: theme.textTheme.bodySmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            
-            // Baris Lokasi
-            Row(
-              children: [
-                Icon(
-                  Icons.location_on,
-                  color: theme.colorScheme.primary,
-                  size: 16,
-                ),
-                const SizedBox(width: 4),
+
+                // Search Bar
                 Expanded(
-                  child: Text(
-                    'Jl. Sukses Menuju Harapan, No. 3, Blok A, Indonesia',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.textTheme.bodySmall?.color?.withOpacity(0.8),
+                  child: SizedBox(
+                    height: 42, // Sedikit diperbesar agar teks tidak terpotong di HP font besar
+                    child: TextField(
+                      readOnly: true,
+                      maxLines: 1,
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search, size: 20),
+                        hintText: "Cari mobil, sparepart...",
+                        hintStyle: theme.textTheme.bodyMedium?.copyWith(
+                          overflow: TextOverflow.ellipsis,
+                          color: Colors.grey,
+                        ),
+                        fillColor: theme.cardColor,
+                        filled: true,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(23),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
+                ),
+
+                const SizedBox(width: 8),
+
+                // Tombol More
+                IconButton(
+                  constraints: const BoxConstraints(),
+                  padding: const EdgeInsets.all(8),
+                  icon: Icon(Icons.more_vert, color: theme.iconTheme.color, size: 26),
+                  onPressed: () {},
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-      
-      const SizedBox(width: 8), // Jarak aman antara Teks dan Tombol Aksi
-      
-      // 3. TOMBOL AKSI KANAN (BERSEBELAHAN)
-      Row(
-        mainAxisSize: MainAxisSize.min, // Agar Row hanya selebar kontennya
-        children: [
-          IconButton(
-            constraints: const BoxConstraints(), // Memadatkan area klik
-            padding: const EdgeInsets.all(8),
-            // tooltip: 'Bagikan', // Opsional: Bagus untuk UX Desktop
-            icon: Icon(Icons.share, color: theme.colorScheme.primary, size: 22),
-            onPressed: () {},
           ),
-          const SizedBox(width: 4), // Jarak antar tombol share dan chat
-          IconButton(
-            constraints: const BoxConstraints(),
-            padding: const EdgeInsets.all(8),
-            // tooltip: 'Chat',
-            icon: Icon(Icons.chat_bubble_outline, color: theme.colorScheme.primary, size: 22),
-            onPressed: () {},
+          
+          // === 2. INFORMASI TOKO ===
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Logo Toko
+                CircleAvatar( 
+                  radius: 28,
+                  backgroundImage: const AssetImage('assets/images/showroom_logo.png'), 
+                  onBackgroundImageError: (_, __) {
+                    debugPrint("Gagal memuat gambar profil");
+                  },
+                  backgroundColor: Colors.grey,
+                  child: const Icon(Icons.store, color: Colors.white70),
+                ),
+                const SizedBox(width: 12), 
+
+                // Info Teks (Nama, Rating, Lokasi)
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Showroom Mobil Bekas Jaya',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      
+                      Row(
+                        children: [
+                          const Icon(Icons.star, color: Colors.amber, size: 16),
+                          const SizedBox(width: 4),
+                          Text(
+                            '4.9', 
+                            style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold)
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(Icons.verified, color: Colors.blue, size: 14),
+                          const SizedBox(width: 2),
+                          Flexible(
+                            child: Text(
+                              '1123 Member',
+                              style: theme.textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on,
+                            color: theme.colorScheme.primary,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 4),
+                          Expanded(
+                            child: Text(
+                              'Jl. Sukses Menuju Harapan, No. 3, Blok A, Indonesia',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: theme.textTheme.bodySmall?.color?.withOpacity(0.8),
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                
+                const SizedBox(width: 4),
+                
+                // Tombol Aksi (Share & Chat)
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      constraints: const BoxConstraints(),
+                      padding: const EdgeInsets.all(8),
+                      icon: Icon(Icons.share, color: theme.colorScheme.primary, size: 22),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      constraints: const BoxConstraints(),
+                      padding: const EdgeInsets.all(8),
+                      icon: Icon(Icons.chat_bubble_outline, color: theme.colorScheme.primary, size: 22),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-    ],
-  ),
-),
-          // TAB HEADER
+
+          // === 3. TAB HEADER ===
           Container(
             margin: const EdgeInsets.only(top: 4, bottom: 8),
             decoration: BoxDecoration(
@@ -224,6 +223,8 @@ class _DashboardMainSectionState extends State<DashboardMainSection> {
               ),
             ),
           ),
+
+          // === 4. TAB CONTENT ===
           _DashboardTabView(tabIndex: tabIndex),
         ],
       ),
@@ -247,8 +248,8 @@ class _DashboardTabItem extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
+        behavior: HitTestBehavior.opaque, // Agar area kosong juga bisa diklik
         child: Container(
-          color: Colors.transparent,
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -257,22 +258,22 @@ class _DashboardTabItem extends StatelessWidget {
                 label,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.titleSmall?.copyWith(
-                  fontWeight: selected ? FontWeight.bold : null,
+                  fontWeight: selected ? FontWeight.bold : FontWeight.normal,
                   color: selected
                       ? theme.colorScheme.primary
                       : theme.textTheme.bodyMedium?.color,
                 ),
               ),
-              const SizedBox(height: 2),
-              if (selected)
-                Container(
-                  height: 3,
-                  width: 28,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
+              const SizedBox(height: 4),
+              // Indikator garis bawah jika dipilih
+              Container(
+                height: 3,
+                width: 28,
+                decoration: BoxDecoration(
+                  color: selected ? theme.colorScheme.primary : Colors.transparent,
+                  borderRadius: BorderRadius.circular(2),
                 ),
+              ),
             ],
           ),
         ),
@@ -328,14 +329,19 @@ class _ShowroomTabBody extends StatelessWidget {
     
     // Logika Responsive kolom grid
     final crossAxis = width < 600 ? 2 : 4; // 2 kolom di HP, 4 di Desktop
+    
+    // PERBAIKAN: Rasio aspek disesuaikan agar card tidak terlalu pendek (text terpotong)
+    // atau terlalu panjang.
+    final childRatio = width < 600 ? 0.70 : 0.75; 
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Semua Mobil', style: theme.textTheme.titleMedium),
-          const SizedBox(height: 10),
+          // SECTION MOBIL
+          Text('Semua Mobil', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 12),
           
           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: FirebaseFirestore.instance.collection('mobils').snapshots(),
@@ -356,16 +362,13 @@ class _ShowroomTabBody extends StatelessWidget {
               final docs = snapshot.data!.docs;
               return GridView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(), // Agar scroll ikut parent
                 itemCount: docs.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxis,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  // UBAH DISINI: 
-                  // 0.72 membuat kartu lebih tinggi daripada 0.86.
-                  // Semakin kecil angka, semakin tinggi kartunya.
-                  childAspectRatio: 0.72, 
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: childRatio,
                 ),
                 itemBuilder: (context, i) {
                   final data = docs[i].data();
@@ -380,12 +383,12 @@ class _ShowroomTabBody extends StatelessWidget {
             },
           ),
           
-          const SizedBox(height: 18),
+          const SizedBox(height: 24),
           
-          Text('Semua Sparepart', style: theme.textTheme.titleMedium),
-          const SizedBox(height: 10),
+          // SECTION SPAREPART
+          Text('Semua Sparepart', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 12),
           
-          // Lakukan hal yang sama untuk Grid Sparepart
           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: FirebaseFirestore.instance.collection('spareparts').snapshots(),
             builder: (context, snapshot) {
@@ -403,10 +406,9 @@ class _ShowroomTabBody extends StatelessWidget {
                 itemCount: docs.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxis,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  // Samakan rasionya
-                  childAspectRatio: 0.72,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: childRatio,
                 ),
                 itemBuilder: (context, i) {
                   final data = docs[i].data();
@@ -452,62 +454,71 @@ class _ProductCard extends StatelessWidget {
       decimalDigits: 0,
     );
 
+    // === LOGIKA PENGECEKAN TIPE GAMBAR ===
+    // Jika string dimulai dengan http, anggap itu URL Internet.
+    // Jika tidak, anggap itu path Aset Lokal.
+    bool isNetworkImage = imageUrl.startsWith('http');
+
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 2,
+      shadowColor: Colors.black12,
       color: theme.cardColor,
       child: InkWell(
         onTap: () {},
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // 1. GAMBAR (Flexible)
-            // Menggunakan Expanded adalah solusi paling aman untuk Grid.
-            // Gambar akan mengisi sisa ruang setelah teks dirender.
+            // 1. GAMBAR (Menggunakan Expanded agar mengisi sisa ruang vertikal)
             Expanded(
               child: Container(
-                width: double.infinity,
                 color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
-                child: imageUrl.isNotEmpty
-                    ? Image.network(
-                        imageUrl,
-                        fit: BoxFit.cover,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return Center(
-                            child: SizedBox(
-                              width: 20, height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
+                child: imageUrl.isEmpty 
+                  ? Center(child: Icon(Icons.image, color: theme.disabledColor))
+                  : (isNetworkImage 
+                      // JIKA IMAGE DARI INTERNET
+                      ? Image.network(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: SizedBox(
+                                width: 20, height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        errorBuilder: (_, __, ___) => Center(
-                          child: Icon(Icons.broken_image_outlined, 
-                            size: 32, color: theme.disabledColor),
-                        ),
-                      )
-                    : Center(
-                        child: Icon(Icons.image_outlined, 
-                          size: 32, color: theme.disabledColor),
-                      ),
+                            );
+                          },
+                          errorBuilder: (_, __, ___) => Center(
+                            child: Icon(Icons.broken_image_outlined, 
+                              size: 28, color: theme.disabledColor),
+                          ),
+                        )
+                      // JIKA IMAGE DARI ASET LOKAL
+                      : Image.asset(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => Center(
+                            child: Icon(Icons.broken_image_outlined, 
+                              size: 28, color: theme.disabledColor),
+                          ),
+                        )
+                    ),
               ),
             ),
 
             // 2. INFORMASI PRODUK
-            // Kita bungkus dengan Padding saja (tanpa Expanded) agar ukurannya
-            // menyesuaikan konten teks.
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min, // Penting!
                 children: [
                   // Judul
                   Text(
@@ -516,12 +527,12 @@ class _ProductCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
                     ),
-                    maxLines: 1, // Batasi 1 baris agar aman
+                    maxLines: 1, 
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 2),
                   
-                  // Subtitle
+                  // Subtitle (Merk)
                   Text(
                     subtitle,
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -538,7 +549,7 @@ class _ProductCard extends StatelessWidget {
                     currencyFormatter.format(price),
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.primary,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                       fontSize: 14,
                     ),
                     maxLines: 1,

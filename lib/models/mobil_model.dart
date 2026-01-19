@@ -8,8 +8,8 @@ class MobilModel {
   final String tahun;
   final String transmisi;
   final String merk;
-  final String? deskripsi; // opsional
-  final double? rating;    // opsional, untuk data rating mobil
+  final String? deskripsi;
+  final double? rating;
 
   MobilModel({
     this.id,
@@ -23,19 +23,29 @@ class MobilModel {
     this.rating,
   });
 
-  // Mapping dari Firestore
+  // Mapping dari Firestore (VERSI ROBUST / ANTI-CRASH)
   factory MobilModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+    
     return MobilModel(
       id: doc.id,
       nama: data['nama'] ?? '',
       gambarUrl: data['gambarUrl'] ?? '',
-      harga: data['harga'] ?? 0,
-      tahun: data['tahun'] ?? '',
+      
+      // FIX PENTING: Paksa konversi ke String dulu, baru ke int
+      // Ini mengatasi jika di Firebase tersimpan sebagai "235000000" (String) atau 235000000 (Number)
+      harga: int.tryParse(data['harga'].toString()) ?? 0,
+      
+      // FIX TAHUN: Pastikan jadi String meskipun di DB tersimpan sebagai angka (misal 2021)
+      tahun: data['tahun']?.toString() ?? '',
+      
       transmisi: data['transmisi'] ?? '',
       merk: data['merk'] ?? '',
       deskripsi: data['deskripsi'] ?? '',
-      rating: (data['rating'] as num?)?.toDouble(),   // ambil rating (jika ada) sebagai double
+      
+      // FIX RATING: Paksa konversi ke double
+      // Ini mengatasi jika rating di DB adalah 4 (Int) atau "4.5" (String)
+      rating: double.tryParse(data['rating'].toString()) ?? 0.0,
     );
   }
 
@@ -49,7 +59,7 @@ class MobilModel {
       'transmisi': transmisi,
       'merk': merk,
       'deskripsi': deskripsi ?? '',
-      'rating': rating, // sertakan jika ingin update ke database
+      'rating': rating,
     };
   }
 }
