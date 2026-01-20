@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "617307420486",
+    "project_id": "showroom-mobil-b887f",
+    "storage_bucket": "showroom-mobil-b887f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617307420486:android:c1b6bd448e29628cde5747",
+        "android_client_info": {
+          "package_name": "com.example.showroom_mobil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617307420486-om305id42svr4d8jq9c8j7654ns66uhf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.showroom_mobil",
+            "certificate_hash": "3b88ac800511c794a823482d79d9b33e8e68d966"
+          }
+        },
+        {
+          "client_id": "617307420486-tt9vnvca6g8b3jj7ucmegeurr87c19um.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvzZDCXd2X6jfs4DhJKDKwhoq3-WyXYR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617307420486-tt9vnvca6g8b3jj7ucmegeurr87c19um.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "617307420486-pp4a5fgondq1j1u5nkoolre0acijmle3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.showroomMobil"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

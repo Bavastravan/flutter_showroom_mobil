@@ -16,6 +16,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _obscure = true;
   String? _errorMessage;
 
+  // Helper untuk format nomor HP ke +62
+  String _formatPhoneToE164(String phone) {
+    if (phone.startsWith('0')) {
+      return '+62${phone.substring(1)}';
+    } else if (phone.startsWith('62')) {
+      return '+$phone';
+    }
+    return phone;
+  }
+
   Future<void> _register() async {
     setState(() {
       _isLoading = true;
@@ -24,10 +34,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     String email = _emailController.text.trim();
     String username = _usernameController.text.trim();
-    String phone = _phoneController.text.trim();
+    String rawPhone = _phoneController.text.trim(); // Ambil input asli
     String password = _passwordController.text.trim();
 
-    if (email.isEmpty || username.isEmpty || phone.isEmpty || password.isEmpty) {
+    if (email.isEmpty || username.isEmpty || rawPhone.isEmpty || password.isEmpty) {
       setState(() {
         _errorMessage = 'Semua field harus diisi!';
         _isLoading = false;
@@ -36,54 +46,64 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     try {
-      var existSnap = await FirebaseFirestore.instance
+      // 1. Format nomor HP agar standar (PENTING untuk Reset Password)
+      String formattedPhone = _formatPhoneToE164(rawPhone);
+
+      // 2. Cek Username (duplikasi)
+      var usernameSnap = await FirebaseFirestore.instance
           .collection('users')
           .where('username', isEqualTo: username)
           .get();
-      if (existSnap.docs.isNotEmpty) {
-        setState(() {
-          _errorMessage = 'Username sudah dipakai!';
-          _isLoading = false;
-        });
-        return;
-      }
-      existSnap = await FirebaseFirestore.instance
-          .collection('users')
-          .where('phone', isEqualTo: phone)
-          .get();
-      if (existSnap.docs.isNotEmpty) {
-        setState(() {
-          _errorMessage = 'No. telepon sudah terdaftar!';
-          _isLoading = false;
-        });
-        return;
+      if (usernameSnap.docs.isNotEmpty) {
+        throw 'Username sudah dipakai!';
       }
 
+      // 3. Cek Nomor HP (duplikasi) - Gunakan nomor yang sudah diformat
+      var phoneSnap = await FirebaseFirestore.instance
+          .collection('users')
+          .where('phone', isEqualTo: formattedPhone)
+          .get();
+      if (phoneSnap.docs.isNotEmpty) {
+        throw 'No. telepon sudah terdaftar!';
+      }
+
+      // 4. Buat Akun di Firebase Auth
       UserCredential cred = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
+      // 5. Simpan Data ke Firestore
+      // PENTING: Simpan 'phone' dengan format +62 agar Reset Password bisa menemukannya
       await FirebaseFirestore.instance.collection('users').doc(cred.user!.uid).set({
         'email': email,
         'username': username,
-        'phone': phone,
+        'phone': formattedPhone, // <--- Disimpan sebagai +62
         'createdAt': FieldValue.serverTimestamp(),
+        'role': 'user', // Opsional: Tambahkan role default
       });
 
       Navigator.pushReplacementNamed(context, '/dashboard');
     } on FirebaseAuthException catch (e) {
       setState(() {
-        _errorMessage = e.message;
+        if (e.code == 'email-already-in-use') {
+          _errorMessage = 'Email sudah terdaftar!';
+        } else if (e.code == 'weak-password') {
+          _errorMessage = 'Password terlalu lemah (min. 6 karakter)';
+        } else {
+          _errorMessage = e.message;
+        }
       });
     } catch (e) {
       setState(() {
         _errorMessage = e.toString();
       });
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -158,7 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               keyboardType: TextInputType.phone,
                               style: theme.textTheme.bodyLarge,
                               decoration: InputDecoration(
-                                labelText: 'No. Telepon',
+                                labelText: 'No. Telepon (Contoh: 0812345...)',
                                 labelStyle: theme.textTheme.bodyMedium,
                                 prefixIcon: Icon(Icons.phone_outlined, color: theme.iconTheme.color),
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),

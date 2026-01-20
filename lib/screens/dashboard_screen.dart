@@ -286,20 +286,28 @@ class _DashboardHomeContent extends StatelessWidget {
 
               const SizedBox(height: 16), // Jarak antar section diperbesar sedikit
 
-              // 2. AKSES CEPAT (SHORTCUTS)
+             // 2. AKSES CEPAT (SHORTCUTS)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-                child: Text('Akses Cepat', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                child: Text(
+                  'Akses Cepat',
+                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                ),
               ),
-              // PERBAIKAN: Tinggi diperbesar ke 120 agar teks tidak terpotong
+              
+              // PERBAIKAN: Tinggi tetap di 120 agar teks tidak terpotong di berbagai rasio layar
               SizedBox(
-                height: 120, 
+                height: 120,
                 child: LayoutBuilder(
                   builder: (context, constraint) {
-                    final cardW = (constraint.maxWidth < 500) ? 85.0 : 100.0; // Lebar card sedikit diperbesar
+                    // Lebar card responsif: 85.0 untuk HP portrait biasa, 100.0 untuk Tablet/Landscape
+                    final cardW = (constraint.maxWidth < 500) ? 85.0 : 100.0; 
+                    
                     return ListView(
                       scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 12), // Padding listview kiri kanan
+                      // Menambahkan physics agar scroll terasa lebih natural (opsional)
+                      physics: const BouncingScrollPhysics(), 
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
                       children: [
                         _ShortcutMenuItem(
                           icon: Icons.directions_car,

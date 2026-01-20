@@ -22,9 +22,9 @@ import 'screens/sparepart/detail_sparepart_screen.dart';
 import 'screens/garansi/klaim_screen.dart';
 import 'screens/reset_password_screen.dart';
 
-// --- TAMBAHKAN IMPORT INI ---
-// Pastikan path foldernya sesuai dengan tempat Anda menyimpan file booking_mobil_screen.dart
-import 'screens/booking/booking_mobil_screen.dart'; 
+// --- IMPORT FILE TRANSAKSI ---
+import 'screens/transaksi/pesan_mobil_screen.dart';
+import 'screens/transaksi/pesan_sparepart_screen.dart'; // Import pesan sparepart
 
 final themeModeNotifier = ThemeModeNotifier();
 
@@ -53,6 +53,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Showroom Mobil Bekas',
           debugShowCheckedModeBanner: false,
+          
+          // Konfigurasi Tema Light
           theme: ThemeData(
             colorScheme: ColorScheme.light(
               primary: AppColors.primaryColor,
@@ -74,9 +76,14 @@ class MyApp extends StatelessWidget {
               labelLarge: AppTextStyles.button.copyWith(color: Colors.white),
             ),
           ),
+          
+          // Konfigurasi Tema Dark
           darkTheme: AppDarkTheme.themeData,
           themeMode: mode,
+          
           initialRoute: '/',
+          
+          // DAFTAR RUTE NAVIGASI
           routes: {
             '/': (context) => LandingScreen(),
             '/login': (context) => LoginScreen(),
@@ -87,9 +94,8 @@ class MyApp extends StatelessWidget {
             '/katalog/list-mobil': (context) => ListMobilScreen(),
             '/katalog/detail-mobil': (context) => DetailMobilScreen(),
             
-            // --- TAMBAHKAN ROUTE INI ---
-            // Route untuk Form Pemesanan Mobil (Beli Sekarang)
-            '/katalog/detail-mobil/booking': (context) => BookingMobilScreen(),
+            // Transaksi Mobil (Checkout)
+            '/katalog/detail-mobil/booking': (context) => const PesanMobilScreen(),
 
             // Servis
             '/servis/booking': (context) => BookingScreen(), // Booking Servis
@@ -98,6 +104,9 @@ class MyApp extends StatelessWidget {
             // Sparepart
             '/sparepart/list': (context) => ListSparepartScreen(),
             '/sparepart/detail': (context) => DetailSparepartScreen(),
+            
+            // Transaksi Sparepart (Checkout) - BARU DITAMBAHKAN
+            '/sparepart/pesan': (context) => const PesanSparepartScreen(),
 
             // Lainnya
             '/garansi/klaim': (context) => KlaimScreen(),
